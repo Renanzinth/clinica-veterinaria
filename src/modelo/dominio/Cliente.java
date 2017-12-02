@@ -10,7 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Cliente extends Pessoa {
+public class Cliente extends Pessooa {
 
 	@Column(length=20, nullable=true)
 	private int credito;
