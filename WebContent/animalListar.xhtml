@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<ui:composition template="modelo.xhtml">
+
+	<ui:define name="titulo">#{msgs.opcaoCadastroAnimal}</ui:define>
+
+	<ui:define name="conteudo">
+		<p:commandLink value="#{msgs.linkCadastrarAnimal}"
+			action="#{animalMB.acaoAbrirInclusao}"></p:commandLink>
+		-
+ 		<p:commandLink value="#{msgs.linkVoltar}" action="#{loginMB.acaoExibirHome}"></p:commandLink>
+ 		
+ 		<p:panelGrid columns="2">
+ 			<p:outputLabel for="nome" value="#{msgs.campoFiltrarNomeAnimal}"></p:outputLabel>
+ 			<p:inputText id="nome" value="#{animalMB.filtroNomeAnimal}"></p:inputText>
+ 		
+ 			<p:outputLabel for="tipo" value="#{msgs.campoFiltrarTipoAnimal}"></p:outputLabel>
+ 			<p:selectOneMenu id="tipo" value="#{animalMB.filtroTipo}" converter="tipo-converter">
+ 				<f:selectItem itemValue="" itemLabel="#{msgs.valorSelecione}" />
+ 				<f:selectItems value="#{animalMB.tipos}" var="tipo" itemLabel="#{tipo.nome}" />
+ 			</p:selectOneMenu>
+ 			
+ 			<h:outputText value=""/>
+ 			<p:commandButton ajax="false" value="#{msgs.botaoPesquisar}" action="#{animalMB.acaoPesquisar}"></p:commandButton>
+ 		
+ 		</p:panelGrid>
+ 		
+ 		<p:dataTable id="tabela" value="#{animalMB.animais}" var="animal" rowHover="true">
+ 			
+ 			<p:column>
+ 				<f:facet name="header">#{msgs.campoAcao}</f:facet>
+ 				<p:panelGrid columns="1">
+ 					<p:commandLink value="#{msgs.linkAlterar}" action="#{animalMB.acaoAbrirAlteracao(animal.id)}" />
+ 					<p:commandLink value="#{msgs.linkExcluir}" action="#{animalMB.acaoExcluir(animal.id)}"/>
+ 				</p:panelGrid>
+ 			</p:column>
+ 			
+ 			<p:column>
+ 				<f:facet name="header">#{msgs.campoId}</f:facet>
+ 				<h:outputText value="#{animal.id}"></h:outputText>
+ 			</p:column>
+ 			
+ 			<p:column>
+ 				<f:facet name="header">#{msgs.campoNome}</f:facet>
+ 				<h:outputText value="#{animal.nome}"></h:outputText>
+ 			</p:column>
+ 			
+ 			<p:column>
+ 				<f:facet name="header">#{msgs.campoIdade}</f:facet>
+ 				<h:outputText value="#{animal.idade}"></h:outputText>
+ 			</p:column>
+ 			
+ 			<p:column>
+ 				<f:facet name="header">#{msgs.campoSexo}</f:facet>
+ 				<h:outputText value="#{animal.sexo}"></h:outputText>
+ 			</p:column>
+ 			
+ 			<p:column>
+ 				<f:facet name="header">#{msgs.campoCliente}</f:facet>
+ 				<h:outputText value="#{animal.cliente}"></h:outputText>
+ 			</p:column>
+ 			
+ 			<p:column>
+ 				<f:facet name="header">#{msgs.campoTipo}</f:facet>
+ 				<h:outputText value="#{animal.tipo}"></h:outputText>
+ 			</p:column>
+ 			
+ 		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="modelo.xhtml">
+
+	<ui:define name="">#{msgs.tituloEditarAnimal}</ui:define>
+
+	<ui:define name="conteudo">
+		<p:panelGrid columns="2">
+
+			<ui:remove>
+				<p:outputLabel for="id" value="#{msgs.campoId}" />
+				<p:inputText id="id" value="#{animalMB.animal.id}" required="true" />
+			</ui:remove>
+
+			<p:outputLabel for="nome" value="#{msgs.campoNome}" />
+			<p:inputText id="nome" value="#{animalMB.animal.nome}" required="true" />
+
+			<p:outputLabel for="idade" value="#{msgs.campoIdade}" />
+			<p:inputText id="idade" value="#{animalMB.animal.idade}" />
+
+			<p:outputLabel for="sexo" value="#{msgs.campoSexo}" />
+			<p:selectOneMenu id="sexo" value="#{animalMB.animal.sexo}" required="true">
+				<f:selectItem itemValue="" itemLabel="#{msgs.valorSelecione}" />
+				<f:selectItem itemValue="M" itemLabel="#{msgs.valorMacho}" />
+				<f:selectItem itemValue="F" itemLabel="#{msgs.valorFemea}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="cliente" value="#{msgs.campoCliente}" />
+			<p:selectOneMenu id="cliente" value="#{animalMB.animal.cliente}" converter="cliente-converter" required="true">
+				<f:selectItem itemValue="" itemLabel="Selecione" />
+				<f:selectItems value="#{animalMB.clientes}" var="cli" itemLabel="#{cli.nome} #{cli.sobrenome}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="tipo" value="#{msgs.campoTipo}" />
+			<p:selectOneMenu id="tipo" value="#{animalMB.animal.tipo}" converter="tipo-converter" required="true">
+				<f:selectItem itemValue="" itemLabel="Selecione"/>
+				<f:selectItems value="#{animalMB.tipos}" var="tipo" itemLabel="#{tipo.nome}" />
+			</p:selectOneMenu>
+
+			<h:outputLabel value="" />
+
+			<h:panelGroup>
+				<p:commandLink ajax="false" value="#{msgs.botaoSalvar}" action="#{animalMB.acaoSalvar}" />
+				-
+				<p:commandLink ajax="false" immediate="true" value="#{msgs.botaoCancelar}" action="#{animalMB.acaoListar}" />
+
+			</h:panelGroup>
+
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>
+</html>
